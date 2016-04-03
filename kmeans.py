@@ -1,3 +1,6 @@
+#!/usr/bin/env python2
+
+
 from scipy.cluster.vq import kmeans, vq
 import sys
 
@@ -9,16 +12,16 @@ def get_means(data, num_centers):
 
 if __name__ == "__main__":
     import csv
-    if len(sys.argv) != 3:
+    if len(sys.argv) != 4 :
         print sys.argv
-        print 'USAGE : ./pgm <num_centers> <output file>'
-        print 'EXAMPLE : ./kmeans.py 10 centers'
+        print 'USAGE : ./pgm <num_centers> <input file> <output file>'
+        print 'EXAMPLE : ./kmeans.py 10 garbage.csv centers.csv'
         exit(1)
 
     num_centers = int(sys.argv[1])
     locations = []
     volume = []
-    with open("res", "rb") as f:
+    with open(sys.argv[2], "rb") as f:
         reader = csv.reader(f)
         for row in reader:
             locations.append(list(map(float, row[:2])))
@@ -30,7 +33,7 @@ if __name__ == "__main__":
         center = indexes[i]
         volume_in_centers[center] += v
 
-    with open(sys.argv[2], "wb") as f:
+    with open(sys.argv[3], "wb") as f:
         writer = csv.writer(f)
         for i in range(len(volume_in_centers)):
             writer.writerow(list(centroids[i]) + [volume_in_centers[i]])
