@@ -1,9 +1,58 @@
-<!DOCTYPE html5>
-<html>
-    <head>
-        <title>Cleanteam Home Page</title>
-    </head>
-    <body>
-        <h1>Coming Up Shortly !</h1>
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jslibs/jquery-2.2.2.min.js"></script>
+    <link rel="stylesheet" href="csslibs/bootstrap.min.css">
+    <script src="jslibs/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="index.css">
+
+    <title>Cleanteam Home Page</title>
+</head>
+<body>
+
+    <div class="container">
+        <div class="col-lg-12">
+            <h1 class="page-header" style="margin-top:10px">Welcome to Cleanteam Home Page</h1>
+            <div class="jumbotron">
+                <p style="font-size:30px;">This is where we showcase the findings of our analysis of urban waste management
+                strategies in Bangalore, India.</p>
+                <h2>Checkout our Cool Visualizations of the Analysis Conducted !</h2>
+            </div>
+        </div>
+         <br>
+
+        <div class="col-lg-4">
+            <a href="time_series.html" target="_blank">
+                <div class="panel">
+                    <div class="panel-body">
+                        <img src="imgs/time_series.png" height="100px" width="200px" alt="">
+                    </div>
+                    <div class="panel-footer">Variation Of Garbage Over Time</div>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="clusters.html" target="_blank">
+                <div class="panel">
+                    <div class="panel-body">
+                        <img src="imgs/clusters.png" height="100px" width="200px" alt="" >
+                    </div>
+                    <a href="clusters.html" target="_blank"><div class="panel-footer">Optimal Places To Collect Garbage</div></a>
+                </div>
+            </a>
+        </div>
+        <div class="col-lg-4">
+            <a href="route.html" target="_blank">
+                <div class="panel">
+                    <div class="panel-body">
+                        <img src="imgs/route.png" height="100px" width="200px" alt="" >
+                    </div>
+                    <div class="panel-footer">Optimal Routes To Collect Garbage</div>
+                </div>
+            </a>
+        </div>
+    </div>
+</body>
 </html>

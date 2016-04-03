@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jslibs/jquery-2.2.2.min.js"></script>
+    <link rel="stylesheet" href="csslibs/bootstrap.min.css">
+    <script src="jslibs/bootstrap.min.js"></script>
+    <script src="js/time_series.js"></script>
+    <title>Watch Time Series Data</title>
+</head>
+<body>
+    <div class="container">
+        <div class="col-lg-12">
+            <h1 class="page-header" style="margin-top:10px">View Garbage Data Across Time</h1>
+            <div class="jumbotron">
+                <p style="font-size:20px;">Watch the <strong>variation of garbage volume</strong> at different locations
+                collected <strong>via crowd sourced app !</strong></p>
+            </div>
+        </div>
+        <div id="plot" style="border:1px solid black;" class="col-lg-12 ">
+            Plot Comes here ! <br>
+            Can Use leaflet js with custom icon. Icon is image_url. So must google for
+            red, amber, green colored ones. <br>
+            After every 500ms clear all markers and push new markers(Of the next day). So, get all data once.<br>
+            The Map object will call a draw method every 500 ms. This will change remove list of markers and add new markers based on the
+            data retreived.<br>
+            Simple. Peace !
+        </div>
+    </div>
+
+
+</body>
+</html>
