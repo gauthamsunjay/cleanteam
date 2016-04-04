@@ -1,6 +1,13 @@
 #!/usr/bin/env python2
 
+import json
+
 import utils
+
+def write_json_output(json_file, py_obj) :
+    f = open(json_file, 'w')
+    f.write(json.dumps(py_obj))
+    f.close()
 
 if __name__ == '__main__' :
     
@@ -26,14 +33,13 @@ if __name__ == '__main__' :
     max_vol = float(sys.argv[3])
     rand_vols = utils.gen_rand_vols(n_gen, max_vol)
 
-    new_list = utils.add_attr(new_co_ords, rand_vols)
+    # create json result
+    res = []
+    for i in range(n_gen) :
+        tmp = {}
+        tmp['co_ord'] = new_co_ords[i]
+        tmp['volume'] = rand_vols[i]
+        res.append(tmp)
 
-    csv = ''
-    for i in new_list :
-        tmp = [str(j) for j in i]
-        csv += ','.join(tmp) + '\n'
-    
     outfile = sys.argv[4]
-    f = open(outfile, 'w')
-    f.write(csv)
-    f.close()
+    write_json_output(outfile, res)

@@ -1,9 +1,29 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python2 
 
 
-from scipy.cluster.vq import kmeans, vq
 import sys
+import json
+from scipy.cluster.vq import kmeans, vq
 
+
+def read_json_input(json_file) :
+    f = open(json_file, 'r')
+    w = f.read()
+    f.close()
+    data = json.loads(w)
+    
+    locs = []
+    vols = []
+    for i in data :
+        locs.append(i['co_ord'])
+        vols.append(i['volume'])
+
+    return locs, vols
+
+def write_json_output(json_file, py_obj) :
+    f = open(json_file, 'w')
+    f.write(json.dumps(py_obj))
+    f.close()
 
 def get_means(data, num_centers):
     centroids, _ = kmeans(data, num_centers)
@@ -19,21 +39,25 @@ if __name__ == "__main__":
         exit(1)
 
     num_centers = int(sys.argv[1])
-    locations = []
-    volume = []
-    with open(sys.argv[2], "rb") as f:
-        reader = csv.reader(f)
-        for row in reader:
-            locations.append(list(map(float, row[:2])))
-            volume.append(float(row[2]))
+    
+    locations, volumes = read_json_input(sys.argv[2])
 
     centroids, indexes = get_means(locations, num_centers)
     volume_in_centers = [0] * num_centers
-    for i, v in enumerate(volume):
+    comps = {}
+    for i, v in enumerate(volumes):
         center = indexes[i]
+        if center not in comps.keys() :
+            comps[center] = []
+        comps[center].append(locations[i])
         volume_in_centers[center] += v
 
-    with open(sys.argv[3], "wb") as f:
-        writer = csv.writer(f)
-        for i in range(len(volume_in_centers)):
-            writer.writerow(list(centroids[i]) + [volume_in_centers[i]])
+    res = []
+    for i in range(len(centroids)) :
+        tmp = {}
+        tmp['cluster_center'] = list(centroids[i])
+        tmp['volume'] = volume_in_centers[i]
+        tmp['components'] = comps[i]
+        res.append(tmp)
+        
+    write_json_output(sys.argv[3], res)

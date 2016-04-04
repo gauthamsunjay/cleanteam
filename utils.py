@@ -32,6 +32,7 @@ def gen_rand_vols(n_gen, max_val) :
     return vols
 
 
+# Not Used anymore !
 # adds attr to list of lists ie. list1
 # list1 : [ [1,2], [3,4] ]
 # attr_list : [10, 11]
