@@ -3,26 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="jslibs/jquery-2.2.2.min.js"></script>
+
     <link rel="stylesheet" href="csslibs/bootstrap.min.css">
+
+    <script src="jslibs/jquery-2.2.2.min.js"></script>
     <script src="jslibs/bootstrap.min.js"></script>
+
     <script src="js/route.js"></script>
+
     <title>Watch Time Series Data</title>
+
+    <script>
+        $('document').ready(function(){
+            clusters = Clusters("../clusters","plot");
+            clusters.draw();
+        });
+    </script>
 </head>
 <body>
     <div class="container">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <h1 class="page-header" style="margin-top:10px">View Optimal route for collection of waste</h1>
-            <div class="jumbotron">
+            <div class="well well-sm">
                 <p style="font-size:20px;">We narrowed on our <strong>optimal route using
-                an evolving algorithm</strong> based on the <strong>data of previous 20 days !</strong></p>
+                an evolving amdorithm</strong> based on the <strong>data of previous 20 days !</strong></p>
             </div>
+            <div class="col-md-12"> <br></div>
         </div>
-        <div id="plot" style="border:1px solid black;" class="col-lg-12 ">
+        <div id="plot" style="border:1px solid black;" class="col-md-12 ">
             We have to decide on this in the coming days as to how and what to show.
             Till then its off the product backlog :-)<br>
             Simple. Peace !
         </div>
+        <div class="col-md-12"> <br><br><br></div>
     </div>
 
 </body>

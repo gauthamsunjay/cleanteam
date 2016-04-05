@@ -3,7 +3,7 @@
 // This creates a encapsulated namespace where we need not worry about JS "this" playing wreck
 // PS. JS Noob wrote this :-P
 
-function clusters(url_, id_) {
+function Clusters(url_, id_) {
     var obj = {
         url : url_,
         id : id_,

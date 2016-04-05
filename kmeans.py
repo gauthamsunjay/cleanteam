@@ -3,8 +3,10 @@
 
 import sys
 import json
+import datetime
 from scipy.cluster.vq import kmeans, vq
 
+import utils
 
 def read_json_input(json_file) :
     f = open(json_file, 'r')
@@ -22,7 +24,7 @@ def read_json_input(json_file) :
 
 def write_json_output(json_file, py_obj) :
     f = open(json_file, 'w')
-    f.write(json.dumps(py_obj))
+    f.write(json.dumps(py_obj, default=utils.json_serial))
     f.close()
 
 def get_means(data, num_centers):
@@ -58,6 +60,7 @@ if __name__ == "__main__":
         tmp['cluster_center'] = list(centroids[i])
         tmp['volume'] = volume_in_centers[i]
         tmp['components'] = comps[i]
+        tmp['datetime'] = datetime.datetime.today()
         res.append(tmp)
         
     write_json_output(sys.argv[3], res)

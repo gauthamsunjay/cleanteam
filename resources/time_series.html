@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script src="jslibs/jquery-2.2.2.min.js"></script>
-
+    <link rel="stylesheet" href="csslibs/iThing.css">
     <link rel="stylesheet" href="csslibs/bootstrap.min.css">
     <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
     <link rel="stylesheet" href="csslibs/MarkerCluster.Default.css">
     <link rel="stylesheet" href="csslibs/MarkerCluster.css">
 
+    <script src="jslibs/jquery-2.2.2.min.js"></script>
+    <script src="jslibs/jquery-ui.js"></script>
+    <script src="jslibs/jQDateRangeSlider-min.js"></script>
 
     <script src="jslibs/bootstrap.min.js"></script>
+
     <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="jslibs/leaflet.markercluster.js"></script>
 
@@ -22,36 +25,28 @@
 
     <script>
         $('document').ready(function(){
-            obj = time_series("../locs","plot");
-            obj.draw();
-            //map = L.map('plot').setView([12.9, 77.5], 16);
-            //L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(map);
+            time_series = TimeSeries("../locs", "plot", "slider");
+            time_series.draw();
         });
     </script>
 </head>
 <body>
     <div class="container">
-        <div class="col-lg-12">
+        <div class="col-md-12">
             <h1 class="page-header" style="margin-top:10px">View Garbage Data Across Time</h1>
-            <div class="jumbotron">
+            <div class="well well-sm">
                 <p style="font-size:20px;">Watch the <strong>variation of garbage volume</strong> at different locations
                 collected <strong>via crowd sourced app !</strong></p>
             </div>
         </div>
-        <!--
-        <div id="plot" style="border:1px solid black;" class="col-lg-12 ">
-            Plot Comes here ! <br>
-            Can Use leaflet js with custom icon. Icon is image_url. So must google for
-            red, amber, green colored ones. <br>
-            After every 500ms clear all markers and push new markers(Of the next day). So, get all data once.<br>
-            The Map object will call a draw method every 500 ms. This will change remove list of markers and add new markers based on the
-            data retreived.<br>
-            Simple. Peace !
-        </div>
-        !-->
-        <div id="plot" class="col-lg-12" style="height : 370px">
 
+        <div id="slider" class="col-md-12">
         </div>
+        <div class="col-md-12"> <br></div>
+
+        <div id="plot" class="col-md-12" style="height : 370px">
+        </div>
+        <div class="col-md-12"><br><br></div>
     </div>
 
 

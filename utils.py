@@ -1,6 +1,13 @@
 #!/usr/bin/env python2
 
 import random
+import datetime
+
+def json_serial(obj) :
+    if isinstance(obj, datetime.datetime) :
+        serial = obj.isoformat()
+        return serial
+    raise TypeError("Type not serializable")
 
 # return list of co_ords : [ [cx1,cy1], [cx2,cy2] ]
 def gen_rand_co_ords(co_ord1, co_ord2, n_gen) :
@@ -31,6 +38,14 @@ def gen_rand_vols(n_gen, max_val) :
 
     return vols
 
+def gen_rand_dates(n_gen, max_date, max_days_before) :
+    dates = []
+    for i in range(n_gen) :
+        rand = random.randrange(0, max_days_before + 1)
+        tmp = max_date - datetime.timedelta(days=rand)
+        dates.append(tmp)
+
+    return dates
 
 # Not Used anymore !
 # adds attr to list of lists ie. list1
