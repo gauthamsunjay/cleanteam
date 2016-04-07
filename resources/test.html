@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css" rel="stylesheet" type="text/css" />
+<link href="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.css" rel="stylesheet" type="text/css" />
+<script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+<script src="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.js"></script>
+  <meta charset="utf-8">
+  <title>Leaflet JS Bin</title>
+  <style>
+    #map {
+      width:600px;
+      height:400px;
+    }
+  </style>
+</head>
+<body>
+  <div id='map'></div>
+
+
+
+  <script>
+    // Remember to include either the Leaflet 0.7.3 or the Leaflet 1.0.0-beta1 library
+
+    var myCenter = new L.LatLng(50.5, 30.51);
+    var map = new L.Map('map', {center: myCenter, zoom: 15});
+
+    var positron = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'
+    }).addTo(map);
+
+
+    var routingControl = L.Routing.control({
+      waypoints: [[50.48, 30.51], [50.52, 30.51]]
+    }).addTo(map);
+    /*setTimeout(function() {
+      routingControl.hide();
+  }, 2000);*/
+  </script>
+</body>
+</html>

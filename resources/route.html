@@ -3,20 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="jslibs/jquery-2.2.2.min.js"></script>
 
     <link rel="stylesheet" href="csslibs/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css">
+    <link rel="stylesheet" href="csslibs/MarkerCluster.Default.css">
+    <link rel="stylesheet" href="csslibs/MarkerCluster.css">
+    <!--<link rel="stylesheet" href="csslibs/leaflet-routing-machine.css">-->
+    <link href="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.css" rel="stylesheet" type="text/css" />
 
-    <script src="jslibs/jquery-2.2.2.min.js"></script>
+
     <script src="jslibs/bootstrap.min.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+    <script src="jslibs/leaflet.markercluster.js"></script>
+    <!--<script src="jslibs/leaflet-routing-machine.js"></script>-->
+    <script src="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.js"></script>
 
-    <script src="js/route.js"></script>
 
-    <title>Watch Time Series Data</title>
+    <script src="js/markers.js"></script>
+
+    <title>Visualize Optimal Routes</title>
 
     <script>
         $('document').ready(function(){
-            clusters = Clusters("../clusters","plot");
-            clusters.draw();
+            map = L.map('plot').setView([12.97, 77.6], 12);
+            position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(map);
+            routing = L.Routing.control({
+                waypoints : [
+                    [12.997644138102753, 77.64424136872823],
+                    [12.868135365869424, 77.5053747324103],
+                ],
+                //show : false,
+            });
+
+            routing.addTo(map);
+            routing._container.onclick = function (e) {
+                var class_name = 'leaflet-routing-container-hide';
+                this.classList.toggle(class_name);
+            };
         });
     </script>
 </head>
@@ -26,16 +50,17 @@
             <h1 class="page-header" style="margin-top:10px">View Optimal route for collection of waste</h1>
             <div class="well well-sm">
                 <p style="font-size:20px;">We narrowed on our <strong>optimal route using
-                an evolving amdorithm</strong> based on the <strong>data of previous 20 days !</strong></p>
+                an evolving algorithm</strong> based on the <strong>data of previous 20 days !</strong></p>
             </div>
             <div class="col-md-12"> <br></div>
         </div>
-        <div id="plot" style="border:1px solid black;" class="col-md-12 ">
-            We have to decide on this in the coming days as to how and what to show.
-            Till then its off the product backlog :-)<br>
-            Simple. Peace !
+
+        <div class="col-md-12"> <br></div>
+
+        <div id="plot" class="col-md-12" style="height : 370px">
         </div>
-        <div class="col-md-12"> <br><br><br></div>
+
+        <div class="col-md-12"><br><br></div>
     </div>
 
 </body>
