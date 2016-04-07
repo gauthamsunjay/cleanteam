@@ -44,7 +44,7 @@ function TimeSeries(url_, id_, ctrl_id_) {
                 var marker = L.marker(co_ord, {icon : icon_});
 
                 // callback that shows volume of garbage
-                marker.bindPopup("" + vol.toFixed(2));
+                marker.bindPopup("vol : " + vol.toFixed(2));
                 marker.on('mouseover', function (e) {
                     this.openPopup();
                 });

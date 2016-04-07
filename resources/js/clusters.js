@@ -8,7 +8,7 @@ function Clusters(url_, id_) {
         url : url_,
         id : id_,
         init : function () {
-            // co_ord of MG Road
+            // co_ord of MG Road, Bangalore-001
             obj.map = L.map(obj.id).setView([12.97, 77.6], 11);
             L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(obj.map);
         },
@@ -20,7 +20,6 @@ function Clusters(url_, id_) {
             obj.addMarkers(data);
         },
         addMarkers : function(data) {
-            var markers = L.markerClusterGroup();
             obj.components_markers = {};
             for (var i in data) {
                 // create large cluster marker
@@ -32,24 +31,26 @@ function Clusters(url_, id_) {
                 // so we can use this to add and remove components markers when needed...
                 obj.components_markers[cluster_id] = [];
 
+                var markers = L.markerClusterGroup();
                 for (var j in data[i]['components']) {
-                    console.log(cluster_marker._leaflet_id);
                     var co_ord = data[i]['components'][j];
                     var marker = L.marker(co_ord, {icon : Markers.smallRedIcon});
-                    obj.components_markers[cluster_id].push(marker);
+                    markers.addLayer(marker);
                 }
+                obj.components_markers[cluster_id] = markers;
 
                 // register callback for big cluster icon.
-                cluster_marker.on('mouseover', function (e) {
+                var vol = data[i]['volume'];
+                cluster_marker.bindPopup("vol : " + vol.toFixed(2));
+                cluster_marker.on('click', function (e) {
                     var cluster_id = e['target']['_leaflet_id'];
-                    for (var i in obj.components_markers[cluster_id]) {
-                        obj.map.addLayer(obj.components_markers[cluster_id][i]);
-                    }
-                });
-                cluster_marker.on('mouseout', function (e) {
-                    var cluster_id = e['target']['_leaflet_id'];
-                    for (var i in obj.components_markers[cluster_id]) {
-                        obj.map.removeLayer(obj.components_markers[cluster_id][i]);
+                    var isdrawn = obj.map.hasLayer(obj.components_markers[cluster_id]);
+                    if (!isdrawn) {
+                        this.openPopup();
+                        obj.map.addLayer(obj.components_markers[cluster_id]);
+                    } else {
+                        this.closePopup();
+                        obj.map.removeLayer(obj.components_markers[cluster_id]);
                     }
                 });
             }
