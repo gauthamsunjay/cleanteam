@@ -41,4 +41,14 @@ def clusters() :
     response.content_type = 'application/json'
     return json.dumps(read_json_file('resources/tmpfiles/clusters'))
 
+@route('/route1')
+def route1() :
+    response.content_type = 'application/json'
+    tmp = read_json_file('resources/tmpfiles/clusters')
+    res = []
+    for i in tmp :
+        res.append(i['cluster_center'])
+
+    return json.dumps(res)
+
 run(host=HOST_IP, port=HOST_PORT, debug=True)

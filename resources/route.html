@@ -6,41 +6,55 @@
     <script src="jslibs/jquery-2.2.2.min.js"></script>
 
     <link rel="stylesheet" href="csslibs/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css">
     <link rel="stylesheet" href="csslibs/MarkerCluster.Default.css">
     <link rel="stylesheet" href="csslibs/MarkerCluster.css">
-    <!--<link rel="stylesheet" href="csslibs/leaflet-routing-machine.css">-->
-    <link href="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="csslibs/leaflet-routing-machine.css">
 
 
     <script src="jslibs/bootstrap.min.js"></script>
-    <script src="http://cdn.leafletjs.com/leaflet-0.7.5/leaflet.js"></script>
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
     <script src="jslibs/leaflet.markercluster.js"></script>
-    <!--<script src="jslibs/leaflet-routing-machine.js"></script>-->
-    <script src="https://rawgit.com/perliedman/leaflet-routing-machine/master/dist/leaflet-routing-machine.js"></script>
-
+    <script src="jslibs/leaflet-routing-machine.js"></script>
 
     <script src="js/markers.js"></script>
 
     <title>Visualize Optimal Routes</title>
 
     <script>
-        $('document').ready(function(){
-            map = L.map('plot').setView([12.97, 77.6], 12);
-            position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(map);
-            routing = L.Routing.control({
-                waypoints : [
-                    [12.997644138102753, 77.64424136872823],
-                    [12.868135365869424, 77.5053747324103],
-                ],
-                //show : false,
+        $('document').ready(function() {
+            $.getJSON('../route1', function(data) {
+                console.log(data);
+                map = L.map('plot').setView([12.97, 77.6], 12);
+                position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(map);
+                routing = L.Routing.control({
+                    waypoints : data,
+                    collapsible : true,
+                    plan : L.Routing.plan(data, {
+                        createMarker : function(i, wp, n) {
+                            console.log([i,n]);
+                            if (i == 0) {
+                                return L.marker(wp.latLng, {icon:Markers.largeGreenIcon,});
+                            } else if (i == n-1) {
+                                return L.marker(wp.latLng, {icon:Markers.largeRedIcon,});
+                            }
+                            return L.marker(wp.latLng, {icon:Markers.smallYellowIcon,});
+                        },
+                        addWaypoints : false,
+                        draggableWaypoints : false,
+                    }),
+                    lineOptions : {
+                        styles : [{
+                            color : 'green',
+                            opacity : 1,
+                            weight : 2,
+                        },],
+                    },
+                    show : false,
+                    waypointMode : "snap",
+                }).addTo(map);
             });
 
-            routing.addTo(map);
-            routing._container.onclick = function (e) {
-                var class_name = 'leaflet-routing-container-hide';
-                this.classList.toggle(class_name);
-            };
         });
     </script>
 </head>
