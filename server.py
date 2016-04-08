@@ -3,7 +3,7 @@
 import sys
 import json
 
-from bottle import route, run, static_file, response
+from bottle import route, run, static_file, response, redirect
 
 def read_json_file(json_file) :
     f = open(json_file)
@@ -21,7 +21,7 @@ HOST_IP = sys.argv[1]
 HOST_PORT = int(sys.argv[2])
 
 
-@route('/static/<filename:path>')
+@route('/cleanteam/static/<filename:path>')
 def serve_static(filename) :
     return static_file(filename, root='resources/')
 
@@ -31,17 +31,17 @@ def test() :
     return "<h1>wohoo!</h1>"
 
 
-@route('/locs')
+@route('/cleanteam/locs')
 def locs() :
     response.content_type = 'application/json'
     return json.dumps(read_json_file('resources/tmpfiles/locs'))
 
-@route('/clusters')
+@route('/cleanteam/clusters')
 def clusters() :
     response.content_type = 'application/json'
     return json.dumps(read_json_file('resources/tmpfiles/clusters'))
 
-@route('/route1')
+@route('/cleanteam/route1')
 def route1() :
     response.content_type = 'application/json'
     tmp = read_json_file('resources/tmpfiles/clusters')
@@ -50,5 +50,10 @@ def route1() :
         res.append(i['cluster_center'])
 
     return json.dumps(res)
+
+@route('/cleanteam')
+@route('/cleanteam/index.html')
+def serve_index() :
+    redirect('/cleanteam/static/index.html')
 
 run(host=HOST_IP, port=HOST_PORT, debug=True)
