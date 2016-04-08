@@ -25,6 +25,7 @@
 
     <script>
         $('document').ready(function(){
+            LARGE_MARKERS = MarkersFactory(50, 20, "large");
             time_series = TimeSeries("../locs", "plot", "slider");
             time_series.draw();
         });

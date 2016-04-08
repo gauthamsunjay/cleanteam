@@ -1,4 +1,4 @@
-#!/usr/bin/env python2 
+#!/usr/bin/env python2
 
 
 import sys
@@ -13,14 +13,14 @@ def read_json_input(json_file) :
     w = f.read()
     f.close()
     data = json.loads(w)
-    
-    locs = []
+
+    co_ords = []
     vols = []
     for i in data :
-        locs.append(i['co_ord'])
+        co_ords.append(i['co_ord'])
         vols.append(i['volume'])
 
-    return locs, vols
+    return data, co_ords, vols
 
 def write_json_output(json_file, py_obj) :
     f = open(json_file, 'w')
@@ -41,10 +41,10 @@ if __name__ == "__main__":
         exit(1)
 
     num_centers = int(sys.argv[1])
-    
-    locations, volumes = read_json_input(sys.argv[2])
 
-    centroids, indexes = get_means(locations, num_centers)
+    locations, co_ords, volumes = read_json_input(sys.argv[2])
+
+    centroids, indexes = get_means(co_ords, num_centers)
     volume_in_centers = [0] * num_centers
     comps = {}
     for i, v in enumerate(volumes):
@@ -62,5 +62,5 @@ if __name__ == "__main__":
         tmp['components'] = comps[i]
         tmp['datetime'] = datetime.datetime.today()
         res.append(tmp)
-        
+
     write_json_output(sys.argv[3], res)

@@ -16,32 +16,24 @@ function TimeSeries(url_, id_, ctrl_id_) {
         draw : function () {
             $.getJSON(obj.url, obj.callback);
         },
-        callback : function(data) {
-            obj.data = data;
-            for (var i in obj.data) {
-                obj.data[i]['datetime'] = new Date(obj.data[i]['datetime']);
+        callback : function(locs) {
+            obj.locs = locs;
+            for (var i in obj.locs) {
+                obj.locs[i]['datetime'] = new Date(obj.locs[i]['datetime']);
             }
-            obj.addMarkers(data);
-            date_range = obj.get_date_range(obj.data);
+            obj.addMarkers(locs);
+            date_range = obj.get_date_range(obj.locs);
             ctrl = Controller(obj.ctrl_id, date_range[0], date_range[1]);
         },
-        addMarkers : function(data) {
+        addMarkers : function(locs) {
             // plugin that helps de-clutter markers.
             // instead of adding marker to map. Add to the below. Then add the below to map
             var markers = L.markerClusterGroup();
-            for (var i in data) {
-                var co_ord = data[i]['co_ord'];
-                var vol = data[i]['volume'];
-                // select marker based on volume
-                var icon_ = Markers.largeRedIcon;
-                if (vol < 50) {
-                    icon_ = Markers.largeYellowIcon;
-                }
-                if (vol < 20) {
-                    icon_ = Markers.largeGreenIcon;
-                }
+            for (var i in locs) {
+                var co_ord = locs[i]['co_ord'];
+                var vol = locs[i]['volume'];
                 // create marker with the proper icon
-                var marker = L.marker(co_ord, {icon : icon_});
+                var marker = LARGE_MARKERS.createMarker(locs[i]);
 
                 // callback that shows volume of garbage
                 marker.bindPopup("vol : " + vol.toFixed(2));
@@ -60,34 +52,34 @@ function TimeSeries(url_, id_, ctrl_id_) {
             // add to map
             obj.map.addLayer(markers);
         },
-        get_date_range : function(data) {
+        get_date_range : function(locs) {
             var min = 0;
             var max = 0;
-            for (var i = 0; i < data.length; ++i) {
-                var curr = data[i]['datetime'];
-                if (curr.getTime() < data[min]['datetime'].getTime()) {
+            for (var i = 0; i < locs.length; ++i) {
+                var curr = locs[i]['datetime'];
+                if (curr.getTime() < locs[min]['datetime'].getTime()) {
                     min = i;
                 }
-                if (curr.getTime() > data[max]['datetime'].getTime()) {
+                if (curr.getTime() > locs[max]['datetime'].getTime()) {
                     max = i;
                 }
             }
 
-            return [new Date(data[min]['datetime']), new Date(data[max]['datetime'])];
+            return [new Date(locs[min]['datetime']), new Date(locs[max]['datetime'])];
         },
         clear : function() {
             obj.map.removeLayer(obj.markers);
         },
         redraw : function(from, to) {
-            filtered_data = [];
-            for (var i in obj.data) {
-                var tmp = obj.data[i]['datetime'];
+            filtered_locs = [];
+            for (var i in obj.locs) {
+                var tmp = obj.locs[i]['datetime'];
                 if (tmp.getTime() >= from.getTime() && tmp.getTime() <= to.getTime()) {
-                    filtered_data.push(obj.data[i]);
+                    filtered_locs.push(obj.locs[i]);
                 }
             }
             obj.clear();
-            obj.addMarkers(filtered_data);
+            obj.addMarkers(filtered_locs);
         }
     };
     obj.init();

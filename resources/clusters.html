@@ -22,6 +22,8 @@
     <title>Optimal Centers For Collection</title>
     <script>
         $('document').ready(function(){
+            LARGE_MARKERS = MarkersFactory(50, 20, "large");
+            SMALL_MARKERS = MarkersFactory(50, 20, "small");
             clusters = Clusters("../clusters","plot");
             clusters.draw();
         });

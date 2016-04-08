@@ -23,6 +23,7 @@
 
     <script>
         $('document').ready(function() {
+            MARKERS = MarkersFactory(50, 20);
             $.getJSON('../route1', function(data) {
                 console.log(data);
                 map = L.map('plot').setView([12.97, 77.6], 12);
@@ -34,11 +35,11 @@
                         createMarker : function(i, wp, n) {
                             console.log([i,n]);
                             if (i == 0) {
-                                return L.marker(wp.latLng, {icon:Markers.largeGreenIcon,});
+                                return L.marker(wp.latLng, {icon:MARKERS.largeGreenIcon,});
                             } else if (i == n-1) {
-                                return L.marker(wp.latLng, {icon:Markers.largeRedIcon,});
+                                return L.marker(wp.latLng, {icon:MARKERS.largeRedIcon,});
                             }
-                            return L.marker(wp.latLng, {icon:Markers.smallYellowIcon,});
+                            return L.marker(wp.latLng, {icon:MARKERS.smallYellowIcon,});
                         },
                         addWaypoints : false,
                         draggableWaypoints : false,

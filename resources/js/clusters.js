@@ -15,16 +15,21 @@ function Clusters(url_, id_) {
         draw : function () {
             $.getJSON(obj.url, obj.callback);
         },
-        callback : function(data) {
-            obj.data = data;
-            obj.addMarkers(data);
+        callback : function(clusters) {
+            obj.clusters = clusters;
+            obj.addMarkers(clusters);
         },
-        addMarkers : function(data) {
+        addMarkers : function(clusters) {
             obj.components_markers = {};
-            for (var i in data) {
+            for (var i in clusters) {
                 // create large cluster marker
-                var cluster_co_ord = data[i]['cluster_center'];
-                var cluster_marker = L.marker(cluster_co_ord, {icon : Markers.largeRedIcon}).addTo(obj.map);
+                var cluster_co_ord = clusters[i]['cluster_center'];
+                var cluster_marker = LARGE_MARKERS.createMarker({
+                    'co_ord' : cluster_co_ord,
+                    'volume' : clusters[i]['volume'],
+                });
+                cluster_marker.addTo(obj.map);
+
                 var cluster_id = cluster_marker['_leaflet_id'];
 
                 // store markers of components for each cluster in dict.
@@ -32,15 +37,14 @@ function Clusters(url_, id_) {
                 obj.components_markers[cluster_id] = [];
 
                 var markers = L.markerClusterGroup();
-                for (var j in data[i]['components']) {
-                    var co_ord = data[i]['components'][j];
-                    var marker = L.marker(co_ord, {icon : Markers.smallRedIcon});
+                for (var j in clusters[i]['components']) {
+                    var marker = SMALL_MARKERS.createMarker(clusters[i]['components'][j]);
                     markers.addLayer(marker);
                 }
                 obj.components_markers[cluster_id] = markers;
 
                 // register callback for big cluster icon.
-                var vol = data[i]['volume'];
+                var vol = clusters[i]['volume'];
                 cluster_marker.bindPopup("vol : " + vol.toFixed(2));
                 cluster_marker.on('click', function (e) {
                     var cluster_id = e['target']['_leaflet_id'];
