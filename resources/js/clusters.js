@@ -23,11 +23,7 @@ function Clusters(url_, id_) {
             obj.components_markers = {};
             for (var i in clusters) {
                 // create large cluster marker
-                var cluster_co_ord = clusters[i]['cluster_center'];
-                var cluster_marker = LARGE_MARKERS.createMarker({
-                    'co_ord' : cluster_co_ord,
-                    'volume' : clusters[i]['volume'],
-                });
+                var cluster_marker = LARGE_MARKERS.createMarker(clusters[i]['cluster_center']);
                 cluster_marker.addTo(obj.map);
 
                 var cluster_id = cluster_marker['_leaflet_id'];
@@ -44,7 +40,7 @@ function Clusters(url_, id_) {
                 obj.components_markers[cluster_id] = markers;
 
                 // register callback for big cluster icon.
-                var vol = clusters[i]['volume'];
+                var vol = clusters[i]['cluster_center']['volume'];
                 cluster_marker.bindPopup("vol : " + vol.toFixed(2));
                 cluster_marker.on('click', function (e) {
                     var cluster_id = e['target']['_leaflet_id'];

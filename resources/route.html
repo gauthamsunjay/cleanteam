@@ -18,44 +18,17 @@
     <script src="jslibs/leaflet-routing-machine.js"></script>
 
     <script src="js/markers.js"></script>
+    <script src="js/route.js"></script>
 
     <title>Visualize Optimal Routes</title>
 
     <script>
         $('document').ready(function() {
             MARKERS = MarkersFactory(50, 20);
-            $.getJSON('../route1', function(data) {
-                console.log(data);
-                map = L.map('plot').setView([12.97, 77.6], 12);
-                position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(map);
-                routing = L.Routing.control({
-                    waypoints : data,
-                    collapsible : true,
-                    plan : L.Routing.plan(data, {
-                        createMarker : function(i, wp, n) {
-                            console.log([i,n]);
-                            if (i == 0) {
-                                return L.marker(wp.latLng, {icon:MARKERS.largeGreenIcon,});
-                            } else if (i == n-1) {
-                                return L.marker(wp.latLng, {icon:MARKERS.largeRedIcon,});
-                            }
-                            return L.marker(wp.latLng, {icon:MARKERS.smallYellowIcon,});
-                        },
-                        addWaypoints : false,
-                        draggableWaypoints : false,
-                    }),
-                    lineOptions : {
-                        styles : [{
-                            color : 'green',
-                            opacity : 1,
-                            weight : 2,
-                        },],
-                    },
-                    show : false,
-                    waypointMode : "snap",
-                }).addTo(map);
+            $.getJSON('../route1', function(locations) {
+                route = Route(locations, 'plot');
+                route.draw();
             });
-
         });
     </script>
 </head>

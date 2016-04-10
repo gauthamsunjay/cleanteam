@@ -57,10 +57,11 @@ if __name__ == "__main__":
     res = []
     for i in range(len(centroids)) :
         tmp = {}
-        tmp['cluster_center'] = list(centroids[i])
-        tmp['volume'] = volume_in_centers[i]
+        tmp['cluster_center'] = {}
+        tmp['cluster_center']['co_ord'] = list(centroids[i])
+        tmp['cluster_center']['volume'] = volume_in_centers[i]
+        tmp['cluster_center']['datetime'] = datetime.datetime.today()
         tmp['components'] = comps[i]
-        tmp['datetime'] = datetime.datetime.today()
         res.append(tmp)
 
     write_json_output(sys.argv[3], res)
