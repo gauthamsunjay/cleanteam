@@ -8,7 +8,7 @@ function Route(locations_, id_) {
         locations : locations_,
         id : id_,
         init : function () {
-            obj.map = L.map(obj.id).setView([12.97, 77.6], 12);
+            obj.map = L.map(obj.id).setView([12.97, 77.6], 11);
             obj.position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,});
             obj.position.addTo(obj.map);
             obj.co_ords = obj.get_co_ords(obj.locations);
@@ -49,7 +49,7 @@ function Route(locations_, id_) {
                 show : false,
             };
             return obj.routing_options;
-        }
+        },
         get_co_ords : function (locs) {
             var co_ords = []
             for (i in locs) {

@@ -9,10 +9,7 @@ from scipy.cluster.vq import kmeans, vq
 import utils
 
 def read_json_input(json_file) :
-    f = open(json_file, 'r')
-    w = f.read()
-    f.close()
-    data = json.loads(w)
+    data = utils.read_json_file(json_file)
 
     co_ords = []
     vols = []
@@ -21,11 +18,6 @@ def read_json_input(json_file) :
         vols.append(i['volume'])
 
     return data, co_ords, vols
-
-def write_json_output(json_file, py_obj) :
-    f = open(json_file, 'w')
-    f.write(json.dumps(py_obj, default=utils.json_serial))
-    f.close()
 
 def get_means(data, num_centers):
     centroids, _ = kmeans(data, num_centers)
@@ -64,4 +56,4 @@ if __name__ == "__main__":
         tmp['components'] = comps[i]
         res.append(tmp)
 
-    write_json_output(sys.argv[3], res)
+    utils.write_json_file(sys.argv[3], res)

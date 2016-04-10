@@ -2,6 +2,18 @@
 
 import random
 import datetime
+import json
+
+def read_json_file(json_file) :
+    f = open(json_file)
+    w = f.read()
+    f.close()
+    return json.loads(w)
+
+def write_json_file(json_file, pyobj) :
+    f = open(json_file, 'w')
+    f.write(json.dumps(pyobj, default=json_serial))
+    f.close()
 
 def json_serial(obj) :
     if isinstance(obj, datetime.datetime) :
@@ -58,7 +70,7 @@ def add_attr(list1, attr_list) :
         tmp = list1[i]
         tmp.append(attr_list[i])
         new_list.append(tmp)
-    
+
     return new_list
 
 

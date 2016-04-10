@@ -5,11 +5,7 @@ import json
 
 from bottle import route, run, static_file, response, redirect
 
-def read_json_file(json_file) :
-    f = open(json_file)
-    w = f.read()
-    f.close()
-    return json.loads(w)
+import utils
 
 if len(sys.argv) != 3 :
     print sys.argv
@@ -34,17 +30,17 @@ def test() :
 @route('/cleanteam/locs')
 def locs() :
     response.content_type = 'application/json'
-    return json.dumps(read_json_file('resources/tmpfiles/locs'))
+    return json.dumps(utils.read_json_file('resources/tmpfiles/locs'))
 
 @route('/cleanteam/clusters')
 def clusters() :
     response.content_type = 'application/json'
-    return json.dumps(read_json_file('resources/tmpfiles/clusters'))
+    return json.dumps(utils.read_json_file('resources/tmpfiles/clusters'))
 
 @route('/cleanteam/route1')
 def route1() :
     response.content_type = 'application/json'
-    tmp = read_json_file('resources/tmpfiles/clusters')
+    tmp = utils.read_json_file('resources/tmpfiles/clusters')
     return json.dumps([i['cluster_center'] for i in tmp])
 
 @route('/cleanteam')
