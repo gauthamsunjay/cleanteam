@@ -10,7 +10,7 @@ if __name__ == '__main__' :
     import sys
     if len(sys.argv) != 6 :
         print sys.argv
-        print 'USAGE : ./pgm <coord range file> <no to gen> <max val of garbage> <valid no of days before today for garbage> <output file>'
+        print 'USAGE : ./pgm <coord range file> <no to gen> <max val of garbage> <valid no of days before today for garbage> <json locations file>'
         print 'EXAMPLE : ' + sys.argv[0] + ' bangalore.coord.range 1000 150.5 20 res'
         exit(1)
 

@@ -37,13 +37,10 @@ def clusters() :
     response.content_type = 'application/json'
     return json.dumps(utils.read_json_file('resources/tmpfiles/clusters'))
 
-@route('/cleanteam/route1')
-def route1() :
+@route('/cleanteam/cluster_route')
+def cluster_route() :
     response.content_type = 'application/json'
-    tmp = utils.read_json_file('resources/tmpfiles/clusters')
-    utils.write_json_file('resources/tmpfiles/route1', tmp[0]['components'])
-    return json.dumps(tmp[0]['components'])
-    #return json.dumps([i['cluster_center'] for i in tmp])
+    return json.dumps(utils.read_json_file('resources/tmpfiles/final_routes'))
 
 @route('/cleanteam')
 @route('/cleanteam/index.html')

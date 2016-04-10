@@ -12,6 +12,7 @@ function Route(locations_, id_) {
             obj.position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,});
             obj.position.addTo(obj.map);
             obj.co_ords = obj.get_co_ords(obj.locations);
+            console.log(obj.co_ords);
         },
         draw : function() {
             MARKERS = MarkersFactory();
@@ -52,8 +53,9 @@ function Route(locations_, id_) {
         },
         get_co_ords : function (locs) {
             var co_ords = []
+            console.log(locs);
             for (i in locs) {
-                co_ords.push(locs[i]['co_ord']);
+                co_ords.push(locs[i]['cluster_center']['co_ord']);
             }
             return co_ords;
         },

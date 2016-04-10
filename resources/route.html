@@ -23,11 +23,39 @@
     <title>Visualize Optimal Routes</title>
 
     <script>
+        function createDiv(id_) {
+            var parent = document.createElement('DIV');
+            parent.classList.add('col-md-12');
+            var res = document.createElement('DIV');
+            res.id = id_;
+            res.classList.add('col-md-12');
+            res.style.height = '370px';
+            var padding = document.createElement('DIV');
+            padding.classList.add('col-md-12');
+            padding.innerHTML = '<br><br>';
+            parent.appendChild(res);
+            parent.appendChild(padding);
+
+            return parent;
+        }
+
         $('document').ready(function() {
             MARKERS = MarkersFactory(50, 20);
-            $.getJSON('../route1', function(locations) {
-                route = Route(locations, 'plot');
-                route.draw();
+            $.getJSON('../cluster_route', function(data) {
+
+                routes = data['routes'];
+                plots = $("#plots")[0];
+                ROUTES = [];
+                for (var i in routes) {
+                    var id = 'route'+i;
+                    var plot = createDiv(id);
+                    console.log(plot);
+                    plots.appendChild(plot);
+                    ROUTES.push(Route(routes[i], id));
+                }
+                for (var i in ROUTES) {
+                    ROUTES[i].draw();
+                }
             });
         });
     </script>
@@ -45,7 +73,7 @@
 
         <div class="col-md-12"> <br></div>
 
-        <div id="plot" class="col-md-12" style="height : 370px">
+        <div id="plots" class="col-md-12" style="height : 370px">
         </div>
 
         <div class="col-md-12"><br><br></div>

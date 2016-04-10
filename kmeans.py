@@ -28,7 +28,7 @@ if __name__ == "__main__":
     import csv
     if len(sys.argv) != 4 :
         print sys.argv
-        print 'USAGE : ./pgm <num_centers> <input file> <output file>'
+        print 'USAGE : ./pgm <num_centers> <json locations file> <json clusters file>'
         print 'EXAMPLE : ./kmeans.py 10 garbage.csv centers.csv'
         exit(1)
 
