@@ -4,19 +4,39 @@ import json
 import random
 from ortools.constraint_solver import pywrapcp
 
+import utils
+
 class EdgeEval :
-    def __init__(self) :
-        pass
+    def __init__(self, locations) :
+        self.locations = locations
+        self.co_ords = [i['co_ord'] for i in self.locations]
 
     def distance(self, i, j) :
-        return random.randrange(1,8)
+        return utils.getGeoDist(self.co_ords[i], self.co_ords[2])
 
 class NodeEval :
+    def __init__(self, locations) :
+        self.locations = locations
+        self.volumes = [i['volume'] for i in self.locations]
+
+    def distance(self, i, j) :
+        # provide demand of i
+        return self.volumes[i]
+
+class EdgeConst :
     def __init__(self) :
         pass
 
     def distance(self, i, j) :
-        return random.randrange(1,8)
+        return random.randint(1,6)
+
+class NodeConst :
+    def __init__(self) :
+        pass
+
+    def distance(self, i, j) :
+        # provide demand of i
+        return random.randint(1,7)
 
 def find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, EdgeEval, NodeEval) :
     routing = pywrapcp.RoutingModel(num_nodes, num_vehicles)
@@ -34,7 +54,7 @@ def find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, EdgeEva
         for route_number in range(routing.vehicles()) :
             tmp = []
             node = routing.Start(route_number)
-            while not routing.IsEnd(node) :
+            while not routing.IsEnd(long(node)) :
                 tmp.append(routing.IndexToNode(node))
                 node = soln.Value(routing.NextVar(node))
 
@@ -68,8 +88,8 @@ if __name__ == '__main__' :
     vehicle_cap =  int(sys.argv[3])
     start_node = int(sys.argv[4])
 
-    edge_wt = EdgeEval()
-    node_wt = NodeEval()
+    edge_wt = EdgeConst()
+    node_wt = NodeConst()
 
     res = find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, edge_wt.distance, node_wt.distance)
 

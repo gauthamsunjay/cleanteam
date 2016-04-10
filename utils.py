@@ -4,6 +4,12 @@ import random
 import datetime
 import json
 
+import geopy.distance
+
+def getGeoDist(co_ord1, co_ord2) :
+    tmp = geopy.distance.great_circle(tuple(co_ord1), tuple(co_ord2))
+    return tmp.km
+
 def read_json_file(json_file) :
     f = open(json_file)
     w = f.read()
@@ -58,20 +64,6 @@ def gen_rand_dates(n_gen, max_date, max_days_before) :
         dates.append(tmp)
 
     return dates
-
-# Not Used anymore !
-# adds attr to list of lists ie. list1
-# list1 : [ [1,2], [3,4] ]
-# attr_list : [10, 11]
-# return : [ [1,2,10], [3,4,11] ]
-def add_attr(list1, attr_list) :
-    new_list = []
-    for i in range(len(list1)) :
-        tmp = list1[i]
-        tmp.append(attr_list[i])
-        new_list.append(tmp)
-
-    return new_list
 
 
 if __name__ == '__main__' :
