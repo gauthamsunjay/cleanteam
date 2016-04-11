@@ -1,8 +1,10 @@
 #!/usr/bin/env python2
 
 import json
+import random
 import datetime
 import dateutil.parser
+import copy
 
 import utils
 
@@ -94,13 +96,30 @@ class CalcHelper :
     def getTotalCost(self, routes) :
         distcost = self.getTotalDistCost(routes)
         volcost = self.getTotalVolCost(routes)
-
+        #print volcost, distcost
         # apply formula and come to a value...
-        return volcost / 10.0 + distcost
+        return volcost / 100.0 + distcost
 
 # Core algorithm implementation requirement.
 def make_random_change(routes) :
-    return routes
+    tmp = []
+    for i in range(len(routes)) :
+        if len(routes[i]) >= 4 :
+            tmp.append(i)
+
+    sel_route = random.choice(tmp)
+    ret = copy.deepcopy(routes)
+    tmp = ret[sel_route]
+
+    start_idx = random.choice(range(1,len(tmp)-2))
+    end_idx = start_idx + 1
+
+    x = ret[sel_route][start_idx]
+    ret[sel_route][start_idx] = ret[sel_route][end_idx]
+    ret[sel_route][end_idx] = x
+    #print routes, (sel_route, start_idx), ret
+
+    return ret
 
 if __name__ == "__main__" :
     import sys
@@ -120,13 +139,13 @@ if __name__ == "__main__" :
     '''
     curr_routes = routes
     curr_cost = calc_helper.getTotalCost(curr_routes)
+    prev_routes = curr_routes
+    prev_cost = curr_cost
     for i in range(30) :
-        prev_routes = curr_routes
-        prev_cost = curr_cost
-
         curr_routes = make_random_change(prev_routes)
         curr_cost = calc_helper.getTotalCost(curr_routes)
 
+        #print prev_cost, curr_cost
         if prev_cost > curr_cost :
             prev_routes = curr_routes
             prev_cost = curr_cost
