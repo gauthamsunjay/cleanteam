@@ -1,6 +1,6 @@
 // Controlling object.
 // Pls follow call flow from html onto here.
-// This creates a encapsulated namespace where we need not worry about JS "this" playing wreck
+// This creates a encapsulated namespace where we need not worry about JS 'this' playing wreck
 // PS. JS Noob wrote this :-P
 
 function TimeSeries(url_, id_, ctrl_id_) {
@@ -11,7 +11,7 @@ function TimeSeries(url_, id_, ctrl_id_) {
         init : function () {
             // co_ord of MG Road
             obj.map = L.map(obj.id).setView([12.97, 77.6], 12);
-            L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,}).addTo(obj.map);
+            L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{maxZoom : 18,}).addTo(obj.map);
         },
         draw : function () {
             $.getJSON(obj.url, obj.callback);
@@ -36,7 +36,7 @@ function TimeSeries(url_, id_, ctrl_id_) {
                 var marker = LARGE_MARKERS.createMarker(locs[i]);
 
                 // callback that shows volume of garbage
-                marker.bindPopup("vol : " + vol.toFixed(2));
+                marker.bindPopup('vol : ' + vol.toFixed(2));
                 marker.on('mouseover', function (e) {
                     this.openPopup();
                 });
@@ -91,7 +91,7 @@ function Controller (id_, from_, to_) {
         id : id_,
         init : function () {
             var parent = document.getElementById(obj.id);
-            obj.slider = document.createElement("div");
+            obj.slider = document.createElement('div');
 
             var bounds_min = new Date(from_);
             var bounds_max = new Date(to_);
@@ -107,13 +107,13 @@ function Controller (id_, from_, to_) {
                     max : to_,
                 }
             });
-            obj.btn = document.createElement("input");
-            obj.btn.type = "button";
-            obj.btn.value = "Refresh";
+            obj.btn = document.createElement('input');
+            obj.btn.type = 'button';
+            obj.btn.value = 'Refresh';
             obj.btn.onclick = obj.callback;
 
             parent.appendChild(obj.slider);
-            parent.appendChild(document.createElement("BR"));
+            parent.appendChild(document.createElement('BR'));
             parent.appendChild(obj.btn);
         },
         callback : function(ev) {

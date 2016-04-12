@@ -5,7 +5,7 @@ def find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, EdgeEva
     routing.SetDepot(start_node)
     routing.set_first_solution_strategy(routing.ROUTING_PATH_CHEAPEST_ARC)
     routing.SetCost(EdgeEval)
-    routing.AddDimension(NodeEval, 0, vehicle_cap, True, "NodeWt")
+    routing.AddDimension(NodeEval, 0, vehicle_cap, True, 'NodeWt')
 
     soln = routing.Solve()
 

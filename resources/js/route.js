@@ -1,6 +1,6 @@
 // Controlling object.
 // Pls follow call flow from html onto here.
-// This creates a encapsulated namespace where we need not worry about JS "this" playing wreck
+// This creates a encapsulated namespace where we need not worry about JS 'this' playing wreck
 // PS. JS Noob wrote this :-P
 
 function Route(locations_, id_) {
@@ -9,7 +9,7 @@ function Route(locations_, id_) {
         id : id_,
         init : function () {
             obj.map = L.map(obj.id).setView([12.97, 77.6], 11);
-            obj.position = L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png",{maxZoom : 18,});
+            obj.position = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{maxZoom : 18,});
             obj.position.addTo(obj.map);
             obj.co_ords = obj.get_co_ords(obj.locations);
             console.log(obj.co_ords);

@@ -44,7 +44,7 @@
             $.getJSON('../cluster_route', function(data) {
 
                 routes = data['routes'];
-                plots = $("#plots")[0];
+                plots = $('#plots')[0];
                 ROUTES = [];
                 for (var i in routes) {
                     var id = 'route'+i;

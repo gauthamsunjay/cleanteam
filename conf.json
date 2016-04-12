@@ -1,0 +1,98 @@
+{
+    "server" : {
+        "json_locations_file" : "resources/tmpfiles/locs",
+        "json_clusters_file" : "resources/tmpfiles/clusters",
+        "json_final_route" : "resources/tmpfiles/final_route",
+        "static_files_root" : "resources/"
+    },
+    "pgms" : [
+        {
+            "use" : "true",
+            "name" : "./gen_coord.py",
+            "args" : [
+                {
+                    "name" : "coord_range_file",
+                    "value" : "bangalore.coord.range"
+                },
+                {
+                    "name" : "number_of_locations",
+                    "value" : 200
+                },
+                {
+                    "name" : "max_garbage_value",
+                    "value" : 150.55
+                },
+                {
+                    "name" : "no_of_days_before_today",
+                    "value" : 20
+                },
+                {
+                    "name" : "json_locations_file",
+                    "value" : "resources/tmpfiles/locs"
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./kmeans.py",
+            "args" : [
+                {
+                    "name" : "num_clusters",
+                    "value" : 10
+                },
+                {
+                    "name" : "json_locations_file",
+                    "value" : "resources/tmpfiles/locs"
+                },
+                {
+                    "name" : "json_clusters_file",
+                    "value" : "resources/tmpfiles/clusters"
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./initial_route.py",
+            "args" : [
+                {
+                    "name" : "json_clusters_file",
+                    "value" : "resources/tmpfiles/clusters"
+                },
+                {
+                    "name" : "num_vehicles",
+                    "value" : 2
+                },
+                {
+                    "name" : "vehicle_capacity",
+                    "value" : 10000
+                },
+                {
+                    "name" : "start_node",
+                    "value" : 4
+                },
+                {
+                    "name" : "json_initial_route_file",
+                    "value" : "resources/tmpfiles/initial_route"
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./algorithm_route.py",
+            "args" : [
+                {
+                    "name" : "json_clusters_file",
+                    "value" : "resources/tmpfiles/clusters"
+                },
+                {
+                    "name" : "json_initial_route_file",
+                    "value" : "resources/tmpfiles/initial_route"
+                },
+                {
+                    "name" : "json_final_route_file",
+                    "value" : "resources/tmpfiles/final_route"
+                }
+            ]
+        }
+    ]
+}

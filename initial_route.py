@@ -23,11 +23,12 @@ class NodeEval :
         # provide demand of i
         return self.volumes[i]
 
-if __name__ == "__main__" :
+if __name__ == '__main__' :
     import sys
 
-    if len(sys.argv) != 5 :
-        print "USAGE : ./pgm <json clusters file> <num_vehicles> <vehicle_cap> <start_node> <json intial route file>"
+    if len(sys.argv) != 6 :
+        print 'USAGE : ./pgm <json clusters file> <num_vehicles> <vehicle_cap> <start_node> <json intial route file>'
+        print sys.argv
         exit(1)
 
     clusters = utils.read_json_file(sys.argv[1])
@@ -45,4 +46,4 @@ if __name__ == "__main__" :
 
     route = tsp_route.find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, edge_wt.distance, node_wt.distance)
 
-    utils.write_json_file("resources/tmpfiles/initial_cluster_route", route)
+    utils.write_json_file(sys.argv[5], route)

@@ -20,8 +20,6 @@
 
 
   <script>
-    // Remember to include either the Leaflet 0.7.3 or the Leaflet 1.0.0-beta1 library
-
     var myCenter = new L.LatLng(50.5, 30.51);
     var map = new L.Map('map', {center: myCenter, zoom: 15});
 
@@ -33,9 +31,6 @@
     var routingControl = L.Routing.control({
       waypoints: [[50.48, 30.51], [50.52, 30.51]]
     }).addTo(map);
-    /*setTimeout(function() {
-      routingControl.hide();
-  }, 2000);*/
   </script>
 </body>
 </html>

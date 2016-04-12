@@ -121,11 +121,11 @@ def make_random_change(routes) :
 
     return ret
 
-if __name__ == "__main__" :
+if __name__ == '__main__' :
     import sys
 
     if len(sys.argv) != 4 :
-        print "USAGE : ./pgm <json clusters file> <json initial route file> <json final routes>"
+        print 'USAGE : ./pgm <json clusters file> <json initial route file> <json final routes>'
         exit(1)
 
     clusters = utils.read_json_file(sys.argv[1])

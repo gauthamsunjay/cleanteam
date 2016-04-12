@@ -24,7 +24,7 @@ def get_means(data, num_centers):
     indexes, _ = vq(data, centroids)
     return centroids, indexes
 
-if __name__ == "__main__":
+if __name__ == '__main__' :
     import csv
     if len(sys.argv) != 4 :
         print sys.argv

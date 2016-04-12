@@ -2,29 +2,29 @@ function MarkersFactory(up_, down_, size_) {
     var markers = {
         up : up_,
         down : down_,
-        size : size_ ? size_ : "large",
+        size : size_ ? size_ : 'large',
         largeRedIcon : L.icon({
-            iconUrl : "imgs/red_marker.png",
+            iconUrl : 'imgs/red_marker.png',
             iconSize : [30,50],
         }),
         largeYellowIcon : L.icon({
-            iconUrl : "imgs/yellow_marker.png",
+            iconUrl : 'imgs/yellow_marker.png',
             iconSize : [30,50],
         }),
         largeGreenIcon : L.icon({
-            iconUrl : "imgs/green_marker.png",
+            iconUrl : 'imgs/green_marker.png',
             iconSize : [30,50],
         }),
         smallRedIcon : L.icon({
-            iconUrl : "imgs/red_marker.png",
+            iconUrl : 'imgs/red_marker.png',
             iconSize : [15,25],
         }),
         smallYellowIcon : L.icon({
-            iconUrl : "imgs/yellow_marker.png",
+            iconUrl : 'imgs/yellow_marker.png',
             iconSize : [15,25],
         }),
         smallGreenIcon : L.icon({
-            iconUrl : "imgs/green_marker.png",
+            iconUrl : 'imgs/green_marker.png',
             iconSize : [15,25],
         }),
         createMarker : function (location) {
@@ -37,7 +37,7 @@ function MarkersFactory(up_, down_, size_) {
         },
         getIconByVolume : function(vol) {
             var icon = markers.largeRedIcon;
-            if (markers.size == "small") {
+            if (markers.size == 'small') {
                 icon = markers.smallRedIcon;
                 if (vol < markers.up) {
                     icon = markers.smallYellowIcon;
@@ -45,7 +45,7 @@ function MarkersFactory(up_, down_, size_) {
                 if (vol < markers.down) {
                     icon = markers.smallGreenIcon;
                 }
-            } else if (markers.size == "large") {
+            } else if (markers.size == 'large') {
                 icon = markers.largeRedIcon;
                 if (vol < markers.up) {
                     icon = markers.largeYellowIcon;

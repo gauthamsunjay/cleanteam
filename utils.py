@@ -25,7 +25,7 @@ def json_serial(obj) :
     if isinstance(obj, datetime.datetime) :
         serial = obj.isoformat()
         return serial
-    raise TypeError("Type not serializable")
+    raise TypeError('Type not serializable')
 
 # return list of co_ords : [ [cx1,cy1], [cx2,cy2] ]
 def gen_rand_co_ords(co_ord1, co_ord2, n_gen) :
@@ -67,4 +67,4 @@ def gen_rand_dates(n_gen, max_date, max_days_before) :
 
 
 if __name__ == '__main__' :
-    print "Does Nothing. Only Import"
+    print 'Does Nothing. Only Import'
