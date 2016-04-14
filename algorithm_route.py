@@ -124,8 +124,8 @@ def make_random_change(routes) :
 if __name__ == '__main__' :
     import sys
 
-    if len(sys.argv) != 4 :
-        print 'USAGE : ./pgm <json clusters file> <json initial route file> <json final routes>'
+    if len(sys.argv) != 5 :
+        print 'USAGE : ./pgm <json clusters file> <json initial route file> <number of iterations> <json final routes>'
         exit(1)
 
     clusters = utils.read_json_file(sys.argv[1])
@@ -141,7 +141,7 @@ if __name__ == '__main__' :
     curr_cost = calc_helper.getTotalCost(curr_routes)
     prev_routes = curr_routes
     prev_cost = curr_cost
-    for i in range(30) :
+    for i in range(int(sys.argv[3])) :
         curr_routes = make_random_change(prev_routes)
         curr_cost = calc_helper.getTotalCost(curr_routes)
 
@@ -163,4 +163,4 @@ if __name__ == '__main__' :
 
         json_res = {'cost' : prev_cost, 'routes' : res}
 
-    utils.write_json_file(sys.argv[3], json_res)
+    utils.write_json_file(sys.argv[4], json_res)
