@@ -12,7 +12,6 @@ function Route(locations_, id_) {
             obj.position = L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png',{maxZoom : 18,});
             obj.position.addTo(obj.map);
             obj.co_ords = obj.get_co_ords(obj.locations);
-            console.log(obj.co_ords);
         },
         draw : function() {
             MARKERS = MarkersFactory();
@@ -31,12 +30,19 @@ function Route(locations_, id_) {
             };
             obj.routing_planOptions = {
                 createMarker : function (i, wp, n) {
+                    var vol = obj.locations[i]['cluster_center']['volume'];
+                    var co_ord = obj.locations[i]['cluster_center']['co_ord'];
+                    var marker;
                     if (i == 0) {
-                        return L.marker(wp.latLng, {icon:MARKERS.largeGreenIcon,});
+                        marker = L.marker(wp.latLng, {icon:MARKERS.largeGreenIcon,});
                     } else if (i == n-1) {
-                        return L.marker(wp.latLng, {icon:MARKERS.largeRedIcon,});
+                        marker = L.marker(wp.latLng, {icon:MARKERS.largeRedIcon,});
+                    } else {
+                        marker = L.marker(wp.latLng, {icon:MARKERS.smallYellowIcon,});
                     }
-                    return L.marker(wp.latLng, {icon:MARKERS.smallYellowIcon,});
+                    marker.bindPopup('loc : ' + co_ord);
+
+                    return marker;
                 },
                 addWaypoints : false,
                 draggableWaypoints : false,
@@ -53,7 +59,6 @@ function Route(locations_, id_) {
         },
         get_co_ords : function (locs) {
             var co_ords = []
-            console.log(locs);
             for (i in locs) {
                 co_ords.push(locs[i]['cluster_center']['co_ord']);
             }
