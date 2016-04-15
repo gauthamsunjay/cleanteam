@@ -41,7 +41,8 @@ function Clusters(url_, id_) {
 
                 // register callback for big cluster icon.
                 var vol = clusters[i]['cluster_center']['volume'];
-                cluster_marker.bindPopup('vol : ' + vol.toFixed(2));
+                var co_ord = clusters[i]['cluster_center']['co_ord'];
+                cluster_marker.bindPopup('vol : ' + vol.toFixed(2) + "\nloc : "+co_ord);
                 cluster_marker.on('click', function (e) {
                     var cluster_id = e['target']['_leaflet_id'];
                     var isdrawn = obj.map.hasLayer(obj.components_markers[cluster_id]);
