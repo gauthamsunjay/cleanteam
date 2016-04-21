@@ -16,11 +16,25 @@
                 },
                 {
                     "name" : "number_of_locations",
-                    "value" : 200
+                    "value" : 100
+                },
+                {
+                    "name" : "json_co_ords_file",
+                    "value" : "resources/tmpfiles/co_ords"
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./assign_vol.py",
+            "args" : [
+                {
+                    "name" : "json_co_ords_file",
+                    "value" : "resources/tmpfiles/co_ords"
                 },
                 {
                     "name" : "max_garbage_value",
-                    "value" : 150.55
+                    "value" : 30.5
                 },
                 {
                     "name" : "no_of_days_before_today",
@@ -38,7 +52,7 @@
             "args" : [
                 {
                     "name" : "num_clusters",
-                    "value" : 10
+                    "value" : 15
                 },
                 {
                     "name" : "json_locations_file",
@@ -64,7 +78,7 @@
                 },
                 {
                     "name" : "vehicle_capacity",
-                    "value" : 10000
+                    "value" : 23000
                 },
                 {
                     "name" : "start_node",
