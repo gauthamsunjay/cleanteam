@@ -8,3 +8,4 @@ run  $ chmod +x ./driver.sh
 run  $ ./driver.sh
 run  $ ./server.py localhost 9000 conf.json
 homepage : http://localhost:9000/cleanteam
+            NOTE : There is no "/" after cleanteam
