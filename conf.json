@@ -37,8 +37,12 @@
                     "value" : 30.5
                 },
                 {
-                    "name" : "no_of_days_before_today",
-                    "value" : 20
+                    "name" : "end_date_of_generation(YYYY-MM-DD)",
+                    "value" : "2016-03-12"
+                },
+                {
+                    "name" : "no_of_days_before_end_date",
+                    "value" : 60
                 },
                 {
                     "name" : "json_locations_file",
