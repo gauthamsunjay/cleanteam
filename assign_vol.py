@@ -34,7 +34,6 @@ if __name__ == '__main__' :
     idx = 0
     for i in range(n_gen) :
         reps = random.randint(0, 20)
-        print (i, reps)
         for i in range(reps) :
             tmp = {}
             tmp['co_ord'] = co_ords_json[i]['co_ord']

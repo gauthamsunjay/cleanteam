@@ -1,0 +1,1 @@
+{"status": "success", "vehicle_capacity": 9000, "num_nodes": 10, "start_node": 4, "num_vehicles": 2, "routes": [[4, 6, 3, 2, 1, 0, 4], [4, 9, 8, 7, 5, 4]]}
