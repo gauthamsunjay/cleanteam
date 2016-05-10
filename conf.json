@@ -2,6 +2,12 @@
     "pgms" : [
         {
             "use" : "true",
+            "name" : "echo 'use cleanteam\ndb.dropDatabase()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "true",
             "name" : "./gen_coord.py",
             "args" : [
                 {
