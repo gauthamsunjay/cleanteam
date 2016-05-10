@@ -4,7 +4,7 @@ import json
 import datetime
 
 import utils
-import DBLayer
+import dblayer
 
 if __name__ == '__main__' :
 
@@ -33,4 +33,4 @@ if __name__ == '__main__' :
         tmp['co_ord'] = new_co_ords[i]
         res.append(tmp)
 
-    DBLayer.write_co_ords(res)
+    dblayer.write_co_ords(res)

@@ -7,7 +7,7 @@ import dateutil.parser
 import copy
 
 import utils
-import DBLayer
+import dblayer
 
 '''
     Helper Class
@@ -127,10 +127,10 @@ if __name__ == '__main__' :
         print 'USAGE : ./pgm <number of iterations>'
         exit(1)
 
-    clusters = DBLayer.read_clusters()
+    clusters = dblayer.read_clusters()
     calc_helper = CalcHelper(clusters)
 
-    route = DBLayer.read_initial_route()
+    route = dblayer.read_initial_route()
     print route
     routes = route['routes']
 
@@ -163,4 +163,4 @@ if __name__ == '__main__' :
 
         json_res = {'cost' : prev_cost, 'routes' : res}
 
-    DBLayer.write_final_route(json_res)
+    dblayer.write_final_route(json_res)

@@ -1,6 +1,6 @@
 import pymongo
 
-from DBConfig import *
+from dbconfig import *
 
 def write_co_ords(docs) :
     return insert_docs(CO_ORDS_DB, CO_ORDS_COLL, docs)

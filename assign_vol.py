@@ -6,7 +6,7 @@ import dateutil.parser
 import random
 
 import utils
-import DBLayer
+import dblayer
 
 if __name__ == '__main__' :
 
@@ -16,7 +16,7 @@ if __name__ == '__main__' :
         print 'EXAMPLE : ' + sys.argv[0] + ' 1000 150.5 20'
         sys.exit(1)
 
-    co_ords_json = DBLayer.read_co_ords()
+    co_ords_json = dblayer.read_co_ords()
     n_gen = len(co_ords_json)
 
     max_vol = float(sys.argv[1])
@@ -43,4 +43,4 @@ if __name__ == '__main__' :
             idx += 1
             res.append(tmp)
 
-    DBLayer.write_locs(res)
+    dblayer.write_locs(res)
