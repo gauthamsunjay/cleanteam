@@ -7,9 +7,10 @@ import datetime
 from scipy.cluster.vq import kmeans, vq
 
 import utils
+import DBLayer
 
 def read_json_input(json_file) :
-    data = utils.read_json_file(json_file)
+    data = DBLayer.read_locs()
 
     co_ords = []
     vols = []
@@ -56,4 +57,4 @@ if __name__ == '__main__' :
         tmp['components'] = comps[i]
         res.append(tmp)
 
-    utils.write_json_file(sys.argv[3], res)
+    DBLayer.write_clusters(res)

@@ -7,6 +7,7 @@ import dateutil.parser
 import copy
 
 import utils
+import DBLayer
 
 '''
     Helper Class
@@ -34,9 +35,7 @@ class CalcHelper :
             _id = cluster['_id']
             self.vols[_id] = {}
             for loc in cluster['components'] :
-                date = dateutil.parser.parse(loc['datetime'])
-                date = date.date()
-                date = date.isoformat()
+                date = loc['datetime'].date().isoformat()
                 if date not in self.vols[_id].keys() :
                     self.vols[_id][date] = 0
                 self.vols[_id][date] += loc['volume']
@@ -128,10 +127,11 @@ if __name__ == '__main__' :
         print 'USAGE : ./pgm <json clusters file> <json initial route file> <number of iterations> <json final routes>'
         exit(1)
 
-    clusters = utils.read_json_file(sys.argv[1])
+    clusters = DBLayer.read_clusters()
     calc_helper = CalcHelper(clusters)
 
-    route = utils.read_json_file(sys.argv[2])
+    route = DBLayer.read_initial_route()
+    print route
     routes = route['routes']
 
     '''
@@ -163,4 +163,4 @@ if __name__ == '__main__' :
 
         json_res = {'cost' : prev_cost, 'routes' : res}
 
-    utils.write_json_file(sys.argv[4], json_res)
+    DBLayer.write_final_route(json_res)

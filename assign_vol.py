@@ -6,6 +6,7 @@ import dateutil.parser
 import random
 
 import utils
+import DBLayer
 
 if __name__ == '__main__' :
 
@@ -15,7 +16,7 @@ if __name__ == '__main__' :
         print 'EXAMPLE : ' + sys.argv[0] + ' co_ords 1000 150.5 20 res'
         sys.exit(1)
 
-    co_ords_json = utils.read_json_file(sys.argv[1])
+    co_ords_json = DBLayer.read_co_ords()
     n_gen = len(co_ords_json)
 
     max_vol = float(sys.argv[2])
@@ -53,5 +54,4 @@ if __name__ == '__main__' :
         tmp['datetime'] = rand_dates[i]
         res.append(tmp)
     """
-    outfile = sys.argv[5]
-    utils.write_json_file(outfile, res)
+    DBLayer.write_locs(res)

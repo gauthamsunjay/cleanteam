@@ -3,12 +3,16 @@
 import random
 import datetime
 import json
+import bson
 
 import geopy.distance
 
 def getGeoDist(co_ord1, co_ord2) :
     tmp = geopy.distance.great_circle(tuple(co_ord1), tuple(co_ord2))
     return tmp.km
+
+def get_json(pyobj) :
+    return json.dumps(pyobj, default=json_serial)
 
 def read_json_file(json_file) :
     f = open(json_file)
@@ -24,6 +28,9 @@ def write_json_file(json_file, pyobj) :
 def json_serial(obj) :
     if isinstance(obj, datetime.datetime) :
         serial = obj.isoformat()
+        return serial
+    if isinstance(obj, bson.objectid.ObjectId) :
+        serial = str(obj)
         return serial
     raise TypeError('Type not serializable')
 

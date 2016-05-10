@@ -6,6 +6,7 @@ import json
 from bottle import route, run, static_file, response, redirect
 
 import utils
+import DBLayer
 
 if len(sys.argv) != 4 :
     print 'USAGE : ./pgm <hostname / ip> <port> <json conf file>'
@@ -31,17 +32,27 @@ def test() :
 @route('/cleanteam/locs')
 def locs() :
     response.content_type = 'application/json'
+    """
     return json.dumps(utils.read_json_file(server_conf['json_locations_file']))
+    """
+    return utils.get_json(DBLayer.read_locs())
+
 
 @route('/cleanteam/clusters')
 def clusters() :
     response.content_type = 'application/json'
+    """
     return json.dumps(utils.read_json_file(server_conf['json_clusters_file']))
+    """
+    return utils.get_json(DBLayer.read_clusters())
 
 @route('/cleanteam/cluster_route')
 def cluster_route() :
     response.content_type = 'application/json'
+    """
     return json.dumps(utils.read_json_file(server_conf['json_final_route']))
+    """
+    return utils.get_json(DBLayer.read_final_route())
 
 @route('/cleanteam')
 @route('/cleanteam/index.html')
