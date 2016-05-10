@@ -9,7 +9,7 @@ from scipy.cluster.vq import kmeans, vq
 import utils
 import DBLayer
 
-def read_json_input(json_file) :
+def parse_json_input() :
     data = DBLayer.read_locs()
 
     co_ords = []
@@ -27,15 +27,15 @@ def get_means(data, num_centers):
 
 if __name__ == '__main__' :
     import csv
-    if len(sys.argv) != 4 :
+    if len(sys.argv) != 2 :
         print sys.argv
-        print 'USAGE : ./pgm <num_centers> <json locations file> <json clusters file>'
-        print 'EXAMPLE : ./kmeans.py 10 garbage.csv centers.csv'
+        print 'USAGE : ./pgm <num_centers>'
+        print 'EXAMPLE : ' + sys.argv[0] + ' 10'
         exit(1)
 
     num_centers = int(sys.argv[1])
 
-    locations, co_ords, volumes = read_json_input(sys.argv[2])
+    locations, co_ords, volumes = parse_json_input()
 
     centroids, indexes = get_means(co_ords, num_centers)
     volume_in_centers = [0] * num_centers

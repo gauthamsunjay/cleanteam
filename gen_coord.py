@@ -9,9 +9,9 @@ import DBLayer
 if __name__ == '__main__' :
 
     import sys
-    if len(sys.argv) != 4 :
-        print 'USAGE : ./pgm <coord range file> <no to gen> <json locations file>'
-        print 'EXAMPLE : ' + sys.argv[0] + ' bangalore.coord.range 1000 res'
+    if len(sys.argv) != 3 :
+        print 'USAGE : ./pgm <coord range file> <no to gen>'
+        print 'EXAMPLE : ' + sys.argv[0] + ' bangalore.coord.range 1000'
         exit(1)
 
     infile = sys.argv[1]

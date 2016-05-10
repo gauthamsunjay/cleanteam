@@ -27,8 +27,8 @@ class NodeEval :
 if __name__ == '__main__' :
     import sys
 
-    if len(sys.argv) != 6 :
-        print 'USAGE : ./pgm <json clusters file> <num_vehicles> <vehicle_cap> <start_node> <json intial route file>'
+    if len(sys.argv) != 4 :
+        print 'USAGE : ./pgm <num_vehicles> <vehicle_cap> <start_node>'
         print sys.argv
         exit(1)
 
@@ -41,9 +41,9 @@ if __name__ == '__main__' :
     node_wt = NodeEval(locs)
 
     num_nodes = len(locs)
-    num_vehicles = int(sys.argv[2])
-    vehicle_cap = int(sys.argv[3])
-    start_node = int(sys.argv[4])
+    num_vehicles = int(sys.argv[1])
+    vehicle_cap = int(sys.argv[2])
+    start_node = int(sys.argv[3])
 
     route = tsp_route.find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, edge_wt.distance, node_wt.distance)
 

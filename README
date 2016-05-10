@@ -6,6 +6,13 @@ ToDo : https://docs.google.com/spreadsheets/d/1wf-i578wWwUWC3rwnX33kyKPHDcPdCeg-
 run  $ ./gen_driver.py conf.json driver.sh
 run  $ chmod +x ./driver.sh
 run  $ ./driver.sh
-run  $ ./server.py localhost 9000 conf.json
+
+OR
+
+run $ ./gen_driver.py conf.json driver.sh && chmod +x driver.sh && ./driver.sh
+
+To Start Server
+
+run  $ ./server.py localhost 9000
 homepage : http://localhost:9000/cleanteam
             NOTE : There is no "/" after cleanteam
