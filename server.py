@@ -8,8 +8,8 @@ from bottle import route, run, static_file, response, redirect
 import utils
 import dblayer
 
-if len(sys.argv) != 3 :
-    print 'USAGE : ./pgm <hostname / ip> <port>'
+if len(sys.argv) != 4 :
+    print 'USAGE : ./pgm <hostname / ip> <port> <server root>'
     print 'Example : ' + sys.argv[0] + ' localhost 9000 conf.json'
     exit(1)
 
@@ -18,7 +18,7 @@ HOST_PORT = int(sys.argv[2])
 
 @route('/cleanteam/static/<filename:path>')
 def serve_static(filename) :
-    return static_file(filename, root=server_conf['static_files_root'])
+    return static_file(filename, root=sys.argv[3])
 
 @route('/')
 @route('/test')
