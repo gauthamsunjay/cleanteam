@@ -131,7 +131,6 @@ if __name__ == '__main__' :
     calc_helper = CalcHelper(clusters)
 
     route = dblayer.read_initial_route()
-    print route
     routes = route['routes']
 
     '''

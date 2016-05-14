@@ -33,6 +33,4 @@ def find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, EdgeEva
     res['start_node'] = start_node
     res['vehicle_capacity'] = vehicle_cap
 
-    print res
-
     return res
