@@ -54,11 +54,11 @@
             "args" : [
                 {
                     "name" : "num_vehicles",
-                    "value" : 2
+                    "value" : 3
                 },
                 {
                     "name" : "vehicle_capacity",
-                    "value" : 9500
+                    "value" : 3500
                 },
                 {
                     "name" : "start_node",
