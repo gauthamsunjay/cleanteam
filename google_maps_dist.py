@@ -11,6 +11,7 @@ def GetMat(co_ords) :
 
     sha = hashlib.sha1(locations).hexdigest()
     fpath = os.path.join('data', 'mats', sha)
+    fpath = 'data/mats/fb332d846d7def1ed119691422cbb16f8aa78265'
     iscached = os.path.isfile(fpath)
 
     if iscached :

@@ -18,6 +18,8 @@ def parse_json_input() :
         co_ords.append(i['co_ord'])
         vols.append(i['volume'])
 
+    print "Total Vol Of Garbage : ", sum(vols)
+
     return data, co_ords, vols
 
 def get_means(data, num_centers):

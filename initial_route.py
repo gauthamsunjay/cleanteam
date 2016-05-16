@@ -66,4 +66,7 @@ if __name__ == '__main__' :
     route = tsp_route.find_optimal_route(num_nodes, num_vehicles, vehicle_cap, start_node, edge_wt.distance, node_wt.distance)
 
     pprint.pprint(route)
+    if route['status'] == 'fail' :
+        exit(1)
+
     dblayer.write_initial_route(route)

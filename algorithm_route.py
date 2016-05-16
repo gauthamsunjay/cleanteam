@@ -84,7 +84,7 @@ class CalcHelper :
             co_ord2 = self.cluster_centers[route[i+1]]
             res += utils.getGeoDist(co_ord1, co_ord2)
         return res
-
+    
     def getTotalDistCost(self, routes) :
         res = 0
         for route in routes :
@@ -133,6 +133,8 @@ if __name__ == '__main__' :
     route = dblayer.read_initial_route()
     routes = route['routes']
 
+    """
+
     '''
         Core algorithm implementation
     '''
@@ -159,7 +161,16 @@ if __name__ == '__main__' :
             tmp.append(calc_helper.clusters[node])
 
         res.append(tmp)
+    """
 
-        json_res = {'cost' : prev_cost, 'routes' : res}
+    res = []
+    for route in routes :
+        tmp = []
+        for node in route :
+            tmp.append(calc_helper.clusters[node])
+
+        res.append(tmp)
+
+        json_res = {'cost' : calc_helper.getTotalCost(routes), 'routes' : res}
 
     dblayer.write_final_route(json_res)

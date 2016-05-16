@@ -1,0 +1,114 @@
+{
+    "pgms" : [
+        {
+            "use" : "false",
+            "name" : "echo 'use cleanteam\ndb.dropDatabase()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "false",
+            "name" : "echo 'use cleanteam\ndb.locs.drop()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "echo 'use cleanteam\ndb.clusters.drop()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "echo 'use cleanteam\ndb.initial_route.drop()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "echo 'use cleanteam\ndb.final_route.drop()' | mongo",
+            "args" : [
+            ]
+        },
+        {
+            "use" : "false",
+            "name" : "./insert_real_data.py",
+            "args" : [
+                {
+                    "name" : "path to real data csv",
+                    "value" : "data/real_data/alldata.csv"
+                }
+            ]
+        },
+        {
+            "use" : "false",
+            "name" : "./gen_coord.py",
+            "args" : [
+                {
+                    "name" : "coord_range_file",
+                    "value" : "bangalore.coord.range"
+                },
+                {
+                    "name" : "number_of_locations",
+                    "value" : 100
+                }
+            ]
+        },
+        {
+            "use" : "false",
+            "name" : "./assign_vol.py",
+            "args" : [
+                {
+                    "name" : "max_garbage_value",
+                    "value" : 30.5
+                },
+                {
+                    "name" : "end_date_of_generation(YYYY-MM-DD)",
+                    "value" : "2016-03-12"
+                },
+                {
+                    "name" : "no_of_days_before_end_date",
+                    "value" : 60
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./kmeans.py",
+            "args" : [
+                {
+                    "name" : "num_clusters",
+                    "value" : 4
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./initial_route.py",
+            "args" : [
+                {
+                    "name" : "num_vehicles",
+                    "value" : 1
+                },
+                {
+                    "name" : "vehicle_capacity",
+                    "value" : 100000
+                },
+                {
+                    "name" : "start_node",
+                    "value" : 3
+                }
+            ]
+        },
+        {
+            "use" : "true",
+            "name" : "./algorithm_route.py",
+            "args" : [
+                {
+                    "name" : "number_iterations",
+                    "value" : 30
+                }
+            ]
+        }
+    ]
+}
